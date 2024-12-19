@@ -1,5 +1,7 @@
 ﻿using ETicaretAPI.Application.Abstraction;
+using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Persistence.Concretes;
+using ETicaretAPI.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +19,16 @@ namespace ETicaretAPI.Persistence
          
         {
             
-            services.AddDbContext<ETicaretDbContext>(options => options.UseSqlServer(Configuration.ConnectionString));
+            services.AddDbContext<ETicaretDbContext>(options => options.UseSqlServer(Configuration.ConnectionString),
+                ServiceLifetime.Singleton);
 
-            services.AddSingleton<IProductService, ProductService>();
-        }
+           // services.AddSingleton<IProductService, ProductService>();
+            services.AddSingleton<ICustomerReadRepository,CustomerReadRepository>();
+            services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
+            services.AddSingleton<IProductReadRepository, ProductReadRepository>();
+            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
+        }   
     }
 }
