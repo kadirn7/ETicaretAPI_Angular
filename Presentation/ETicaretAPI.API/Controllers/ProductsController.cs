@@ -24,13 +24,12 @@ namespace ETicaretAPI.API.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetProducts()
         {
-            await _productWriteRepository.AddRangeAsync(new()
-    {
-        new() {Id = Guid.NewGuid(), Name = "Product1", Price = 100, Stock = 10},
-    });
-            await _productWriteRepository.SaveAsync();
+            Product p = await _productReadRepository.GetByIdAsync("bd587b2c-59e7-4133-b50c-fe819b19496f");
+            p.Name = "Ahmet";
+            _productWriteRepository.SaveAsync();
 
-            return Ok("Products added successfully");
+
+            return Ok();
         }
 
         [HttpGet("{id}")]
