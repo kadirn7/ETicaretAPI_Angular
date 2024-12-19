@@ -19,16 +19,15 @@ namespace ETicaretAPI.Persistence
          
         {
             
-            services.AddDbContext<ETicaretDbContext>(options => options.UseSqlServer(Configuration.ConnectionString),
-                ServiceLifetime.Singleton);
+            services.AddDbContext<ETicaretDbContext>(options => options.UseSqlServer(Configuration.ConnectionString));
 
            // services.AddSingleton<IProductService, ProductService>();
-            services.AddSingleton<ICustomerReadRepository,CustomerReadRepository>();
-            services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
-            services.AddSingleton<IProductReadRepository, ProductReadRepository>();
-            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
-            services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
-            services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<ICustomerReadRepository,CustomerReadRepository>();
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
         }   
     }
 }
